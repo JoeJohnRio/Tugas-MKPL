@@ -1,63 +1,88 @@
-# ANDROID-MVP-KOTLIN
+# Android Kotlin MVP Architecture: Sample App
+[![Mindorks](https://img.shields.io/badge/mindorks-opensource-blue.svg)](https://mindorks.com/open-source-projects)
+[![Mindorks Community](https://img.shields.io/badge/join-community-blue.svg)](https://mindorks.com/join-community)
 
-Android MVP architecture with Kotlin + Retrofit2 + RxJava2 + Room + Dagger
+This repository contains a detailed sample app that implements MVP architecture in Kotlin using Dagger2, Room, RxJava, FastAndroidNetworking, PlaceHolderView and AndroidDebugDatabase
+<p align="center">
+  <img src="https://janishar.github.io/images/mvp-app-pics/mvp-login.png" width="250">
+  <img src="https://janishar.github.io/images/mvp-app-pics/main-view.png" width="250">
+  <img src="https://janishar.github.io/gifs/mvp-app.gif" width="250">
+</p>
+<br>
+<p align="center">
+  <img src="https://janishar.github.io/images/mvp-app-pics/mvp-drawer.png" width="200">
+  <img src="https://janishar.github.io/images/mvp-app-pics/mvp-rating.png" width="200">
+  <img src="https://janishar.github.io/images/mvp-app-pics/mvp-feed.png" width="200">
+  <img src="https://janishar.github.io/images/mvp-app-pics/mvp-empty-state.png" width="200">
+</p>
+<br>
+<br>
 
-## Libraries
+# Architecture Blueprint
+![Blueprint](https://janishar.github.io/images/mvp-app-pics/mvp-interactor-arch.png)
+<br>
 
-In this sample project includes some of useful libraries for Android, such as:
+# Project Structure
+![Structure](https://janishar.github.io/images/mvp-app-pics/mvp-interactor-project-structure.png)
+<br>
 
-- [Retrofit](http://square.github.io/retrofit/) : A type-safe REST client for Android which intelligently maps an API into a client interface using annotations.
-- [Dagger](https://google.github.io/dagger/) : Dagger is a fully static, compile-time dependency injection framework for both Java and Android.
-- [RxJava2](https://github.com/ReactiveX/RxJava) : Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM.
-- [Room](https://developer.android.com/training/data-storage/room/) : Room provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite
+# Read the below listed articles. They describe the MVP concepts and the Project structure.
+1. [MVP: Part 1](https://blog.mindorks.com/essential-guide-for-designing-your-android-app-architecture-mvp-part-1-74efaf1cda40#.lkml1yggq)
+2. [MVP: Part 2](https://blog.mindorks.com/essential-guide-for-designing-your-android-app-architecture-mvp-part-2-b2ac6f3f9637#.dge0wl8rl)
+3. [MVP: Part 3](https://blog.mindorks.com/essential-guide-for-designing-your-android-app-architecture-mvp-part-3-dialog-viewpager-and-7bdfab86aabb)
+4. [Extension with Interactors and Repositories](https://blog.mindorks.com/android-mvp-architecture-extension-with-interactors-and-repositories-bd4b51972339)
 
-### Resources to start with Kotlin on Android
+#### The app has following packages:
+1. **data**: It contains all the data accessing and manipulating components.
+2. **di**: Dependency providing classes using Dagger2.
+3. **ui**: View classes along with their corresponding Presenters.
+4. **utils**: Utility classes.
 
-* [Getting started with Android and Kotlin by Jetbrains][1]
-* [Get Started with Kotlin on Android by Google][2]
-* [Kotlin Lang Reference][3]
-* [Kotlin Blog by Jetbrains][4]
-* [Kotlin Kapt Annotation processing][5]
-* [Kotlin for Android Developers by Antonio Leiva][6]
+#### Classes have been designed in such a way that it could be inherited and maximize the code reuse.
 
-[1]: https://kotlinlang.org/docs/tutorials/kotlin-android.html
-[2]: https://developer.android.com/kotlin/get-started.html
-[3]: https://kotlinlang.org/docs/reference/
-[4]: https://blog.jetbrains.com/kotlin/
-[5]: https://kotlinlang.org/docs/reference/kapt.html
-[6]: https://antonioleiva.com/kotlin-android-developers-book/
+### Library reference resources:
+1. RxJava2: https://github.com/amitshekhariitbhu/RxJava2-Android-Samples
+2. Dagger2: https://github.com/MindorksOpenSource/android-dagger2-example
+3. FastAndroidNetworking: https://github.com/amitshekhariitbhu/Fast-Android-Networking
+4. PlaceHolderView: https://github.com/janishar/PlaceHolderView
+5. AndroidDebugDatabase: https://github.com/amitshekhariitbhu/Android-Debug-Database
+6. Calligraphy: https://github.com/chrisjenx/Calligraphy
+7. Room: https://developer.android.com/topic/libraries/architecture/room.html
+8. ButterKnife: http://jakewharton.github.io/butterknife/
 
-## Demo
+### Concept reference resources:
+1. [Introduction to Dagger 2: Part 1](https://blog.mindorks.com/introduction-to-dagger-2-using-dependency-injection-in-android-part-1-223289c2a01b#.ki6nt86l6)
+2. [Introduction to Dagger 2: Part 2](https://blog.mindorks.com/introduction-to-dagger-2-using-dependency-injection-in-android-part-2-b55857911bcd#.mkpzyk8sa)
+3. [Android Dagger2: Critical things to know before you implement](https://blog.mindorks.com/android-dagger2-critical-things-to-know-before-you-implement-275663aecc3e#.bskiz1879)
+4. [The Best Android Networking Library for Fast and Easy Networking](https://blog.mindorks.com/simple-and-fast-android-networking-19ed860d1455#.cyzrve85o)
+5. [RxJava + Fast Android Networking](https://blog.mindorks.com/rxjava-fast-android-networking-6e3d90ee4387#.7hjoex22m)
+6. [Migrating from RxJava 1.0 to RxJava 2.0 and Learn RxJava by Examples](https://blog.mindorks.com/migrating-from-rxjava1-to-rxjava2-5dac0a94b4aa#.3lg46kora)
+7. [Android Tinder Swipe View Example](https://blog.mindorks.com/android-tinder-swipe-view-example-3eca9b0d4794#.u7i7jbbvy)
+8. [Debugging Android Databases And Shared Preferences In The Easiest Way](https://blog.mindorks.com/debugging-android-databases-and-shared-preferences-in-the-easiest-way-e5f705dfc06b#.pxw0hvnws)
+9. [RxJava Anatomy: What is RxJava, how RxJava is designed, and how RxJava works.](https://blog.mindorks.com/rxjava-anatomy-what-is-rxjava-how-rxjava-is-designed-and-how-rxjava-works-d357b3aca586)
 
-This project show the latest news of morocco using News API [https://newsapi.org/].
+### Looking for MVVM Architecture - [Check here](https://github.com/MindorksOpenSource/android-mvvm-architecture)
 
+### Mindorks open source projects
+[Check out Mindorks awesome open source projects here](https://mindorks.com/open-source-projects)
 
-![](media/capture.png)
+### License
+```
+   Copyright (C) 2017 MINDORKS NEXTGEN PRIVATE LIMITED
 
-## Developed By
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-* Ali DOUIRI  - <my.alidouiri@gmail.com>
+       http://www.apache.org/licenses/LICENSE-2.0
 
-## License
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+```
 
-MIT License
-
-Copyright (c) 2018 Ali DOUIRI
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+### Contributing to Android Kotlin MVP Architecture
+All pull requests are welcome, make sure to follow the [contribution guidelines](CONTRIBUTING.md)
+when you submit pull request.

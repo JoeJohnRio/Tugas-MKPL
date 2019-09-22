@@ -1,84 +1,101 @@
 apply plugin: 'com.android.application'
+
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
+
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
-    compileSdkVersion build_versions.target_sdk
-    buildToolsVersion build_versions.build_tools
+    compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.example.kotlin.mvp.androidmvparchitexturekotlin"
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
+        applicationId "com.mindorks.framework.mvp"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
-
+        debug {
+            buildConfigField("String", "BASE_URL", "\"http://www.mocky.io/v2\"")
+            buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
+        }
         release {
-
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
+            buildConfigField("String", "BASE_URL", "\"http://www.mocky.io/v2\"")
+            buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
         }
-
-        debug{
-
-            buildConfigField "String", "BASE_URL", "\"https://newsapi.org/v2/top-headlines/\""
-            buildConfigField "String", "VALUE_KEY_API_NEWS", "\"d03181877c724ff0b1c2294e9a65b84c\""
-
-        }
-    }
-
-    /**
-     * if you will mix Java and Kotlin files in the same project is a good practice create a kotlin directory
-     * but I prefer created the kotlin package although I will not mix them
-     **/
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
-
-    packagingOptions {
-        exclude 'META-INF/rxjava.properties'
     }
 }
 
 dependencies {
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation "junit:junit:$versions.junit"
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$versions.espresso"
-    implementation "com.android.support:design:$versions.support"
-    implementation "com.android.support:recyclerview-v7:$versions.support"
-    implementation "com.android.support:cardview-v7:$versions.support"
-    implementation "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
 
-    // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin_version"
-    compile "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin_version"
+    // kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$rootProject.kotlinVersion"
 
-    // Java Rx
-    implementation "io.reactivex.rxjava2:rxjava:$versions.rxjava"
-    implementation "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
+    // android support libraries
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:support-vector-drawable:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:animated-vector-drawable:$rootProject.supportLibraryVersion"
 
-    // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
-    implementation "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit"
-    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+    // network
+    implementation "com.amitshekhar.android:rx2-android-networking:$rootProject.rx2FastAndroidNetworking"
 
-    // Room
-    implementation "android.arch.persistence.room:runtime:$versions.archVersion"
-    kapt "android.arch.persistence.room:compiler:$versions.archVersion"
-    implementation "android.arch.persistence.room:rxjava2:$versions.archVersion"
+    // database
+    implementation "android.arch.persistence.room:rxjava2:$rootProject.roomDatabaseVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    kapt "android.arch.persistence.room:compiler:$rootProject.roomDatabaseVersion"
 
-    // Dagger
-    implementation "com.google.dagger:dagger:$versions.dagger"
-    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    // font
+    implementation "uk.co.chrisjenx:calligraphy:$rootProject.calligraphyVersion"
 
-    // Glide
-    implementation "com.github.bumptech.glide:glide:$versions.glide"
+    // image
+    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+
+    // parser
+    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+
+    // debug database
+    debugImplementation "com.amitshekhar.android:debug-db:$rootProject.debugDBVersion"
+
+    // dependency injection
+    implementation "com.google.dagger:dagger:$rootProject.dagger2Version"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger2Version"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger2Version"
+
+    // reactive
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava2Version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
+
+    // code generator for view
+    implementation "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
+    kapt "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
+
+    // swipe view
+    implementation "com.mindorks:placeholderview:$rootProject.placeholderviewVersion"
+
+    // logger
+    implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
+
+    // dependencies for local unit tests
+    testImplementation "junit:junit:$rootProject.ext.junitVersion"
+    testImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+    kaptTest "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
+
+    // UI Testing
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$rootProject.espressoVersion"
+    androidTestImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
+
+    // Android Kotlin Extension
+    implementation "androidx.core:core-ktx:$rootProject.androidKTXVersion"
 }
-
